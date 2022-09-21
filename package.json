@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "staticrypt index.html 123 --title=\"VI Дальневосточная конференция МАКМАХ по антимикробной терапии и клинической микробиологии\" --output=\"./docs/index.html\" --file-template=\"./password_template.html\" --config  --decrypt-button=\"Показать\" --remember=\"Запомнить меня\" --passphrase-placeholder=\"Пароль\" --remember-label=\"Запомнить меня\" && cp -rf files docs/files"
   },
   "author": "",
   "license": "ISC",
