@@ -1,0 +1,33 @@
+default:
+  image: iacmac/alpine-hugo-npm:latest
+
+  before_script:
+    - npm version
+    - hugo version
+
+variables:
+  CONTAINER_NAME: ulan-ude-2022
+
+github-pages: 
+  services: 
+  - iacmac/alpine-hugo-npm:latest
+  script:
+  - rm -rf public
+  - git clone --depth 1 https://rymbln:$GITHUB_ACCESS_TOKEN@github.com/iacmac-web-tools/ulan-ude-2022.git public
+  - rm -rf public/*
+  - npm install
+  - npm run prebuild
+  - npm run build:minify
+  - cd public
+  - git config user.email "rymbln@gmail.com"
+  - git config --global user.name "rymbln"
+  - git add -A
+  - git commit -m "$CI_COMMIT_MESSAGE"
+  - git push
+  artifacts:
+    paths:
+    - public
+  only:
+  - main
+  tags:
+  - deploy
